@@ -1,2 +1,7 @@
 @import "tailwindcss";
 
+.pdf-export {
+  /* Only define styles for things that break PDF rendering */
+  font-family: sans-serif;
+  /* don't set background */
+}

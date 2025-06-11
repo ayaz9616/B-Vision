@@ -113,8 +113,8 @@ export default function HomePage() {
         <div className="mt-20 sm:mt-28 flex flex-col items-center bg-transparent rounded-3xl shadow-none p-0 max-w-2xl w-full text-center">
           {/* Catchy lines */}
           <div className="space-y-4 mb-8 max-w-xl">
-            <p className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-green-400 to-amber-400 font-extrabold text-3xl sm:text-4xl tracking-wide font-[Georgia,serif] italic drop-shadow-lg animate-gradient-text">
-              Get the most from your <span className="underline decoration-indigo-400 decoration-4">customer reviews</span>
+            <p className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-green-400 to-amber-400 font-extrabold text-3xl sm:text-5xl tracking-wide drop-shadow-lg animate-gradient-text">
+              Get the most from your <span className=" decoration-indigo-400 decoration-4">customer reviews</span>
             </p>
             <p className="text-indigo-300 font-semibold text-xl sm:text-2xl tracking-tight font-[‘Courier New’, monospace] animate-fade-in-up">
               Transform feedback into <span className="text-green-400 font-bold">business growth</span> and innovation

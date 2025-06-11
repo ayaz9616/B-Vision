@@ -11,52 +11,58 @@ export default function UploadPage() {
   const router = useRouter();
 
   // Progress polling
-  const pollProgress = async (jobId: string) => {
-    let done = false;
-    while (!done) {
-      const res = await fetch(`http://localhost:5000/progress/${jobId}`);
-      const data = await res.json();
-      setProgress(data.progress);
-      if (data.progress >= 100 || data.progress < 0) {
-        done = true;
-      } else {
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-      }
-    }
-  };
+  
+// const backendUrl = process.env.NEXT_PUBLIC_BACKEND_API;
+const backendUrl = "https://b-vision.onrender.com";
 
-  // Upload and analyze
-  const uploadAndAnalyze = async () => {
-    if (!file) return;
-    setLoading(true);
-    setProgress(0);
-    const formData = new FormData();
-    formData.append("file", file);
-
-    // Start analysis and get job_id
-    const res = await fetch("http://localhost:5000/analyze", {
-      method: "POST",
-      body: formData,
-    });
+// console.log("Backend URL:", backendUrl); 
+// Progress polling
+const pollProgress = async (jobId: string) => {
+  let done = false;
+  while (!done) {
+    const res = await fetch(`${backendUrl}/progress/${jobId}`);
     const data = await res.json();
-    if (!data.job_id) {
-      setLoading(false);
-      alert(data.error || "Failed to start analysis");
-      return;
+    setProgress(data.progress);
+    if (data.progress >= 100 || data.progress < 0) {
+      done = true;
+    } else {
+      await new Promise((resolve) => setTimeout(resolve, 2000));
     }
-    const jobId = data.job_id;
-    // Poll for progress
-    await pollProgress(jobId);
-    // Fetch result
-    const resultRes = await fetch(`http://localhost:5000/result/${jobId}`);
-    const resultData = await resultRes.json();
-    localStorage.setItem("analysis", JSON.stringify(resultData));
-    setProgress(100);
-    setTimeout(() => {
-      setLoading(false);
-      router.push("/results");
-    }, 400);
-  };
+  }
+};
+
+// Upload and analyze
+const uploadAndAnalyze = async () => {
+  if (!file) return;
+  setLoading(true);
+  setProgress(0);
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const res = await fetch(`${backendUrl}/analyze`, {
+    method: "POST",
+    body: formData,
+  });
+  const data = await res.json();
+  if (!data.job_id) {
+    setLoading(false);
+    alert(data.error || "Failed to start analysis");
+    return;
+  }
+  const jobId = data.job_id;
+
+  await pollProgress(jobId);
+
+  const resultRes = await fetch(`${backendUrl}/result/${jobId}`);
+  const resultData = await resultRes.json();
+  localStorage.setItem("analysis", JSON.stringify(resultData));
+  setProgress(100);
+  setTimeout(() => {
+    setLoading(false);
+    router.push("/results");
+  }, 400);
+};
+
 
   // Drag & Drop handlers
   const handleDrag = (e: React.DragEvent<HTMLDivElement>) => {
