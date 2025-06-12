@@ -3,10 +3,11 @@
 <body class="max-w-4xl mx-auto p-6">
   <header class="text-center mb-8">
     <h1 class="text-4xl font-bold text-white mb-4">📱 Sentiment Analysis on Mobile Phone Reviews</h1>
-    <img src="public/banner.png" alt="Project Banner" class="w-full rounded-lg shadow-lg mb-4">
+   <div>
     <p class="text-lg">
       A comprehensive sentiment analysis platform designed to help businesses, analysts, and product managers gain actionable insights from mobile phone reviews. Leveraging advanced natural language processing (NLP) and interactive visualizations, this tool empowers users to understand customer sentiment, identify product strengths and weaknesses, and make data-driven decisions.
     </p>
+   </div>
   </header>
 
   <section class="mb-8">
@@ -69,8 +70,7 @@
     <ol class="list-decimal list-inside space-y-4">
       <li>
         <strong>Clone the Repository</strong>:
-        <pre><code>git clone https://github.com/your-username/Sentiment-Analysis-on-reviews.git
-cd Sentiment-Analysis-on-reviews</code></pre>
+        <pre><code>git clone https://github.com/ayaz9616/B-Vision.git</code></pre>
       </li>
       <li>
         <strong>Install Dependencies</strong>:
