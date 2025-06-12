@@ -4,8 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sentiment Analysis on Mobile Phone Reviews</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
+  
     body {
       background-color: #1a202c;
       color: #e2e8f0;
