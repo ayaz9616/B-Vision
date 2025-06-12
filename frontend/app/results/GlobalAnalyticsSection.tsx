@@ -162,8 +162,8 @@ export default function GlobalAnalyticsSection({ data, selectedPhoneNames }: Glo
         <span className="font-semibold text-cyan-400">Which age group likes which feature the most:</span>
         <ul className="list-disc ml-6 mt-1">
           {ageFeatureMap.length ? ageFeatureMap.map(({ age, best }) => (
-            <li key={age} className="mb-2">
-              <span className="text-blue-500 font-semibold">{age}</span>: {' '}
+            <li key={age} className="mb-2 text-gray-200">
+              <span className="text-indigo-400 font-semibold">{age}</span>: {' '}
               {best.map((x, i) => (
                 <React.Fragment key={x.feature}>
                   {i > 0 && ', '}
@@ -181,7 +181,7 @@ export default function GlobalAnalyticsSection({ data, selectedPhoneNames }: Glo
           {brandPerf.length ? brandPerf.map(({ brand, positive, products }) => (
             <li key={brand} className="mb-2 text-gray-200">
               <div>
-                <span className="text-blue-500 font-semibold">{brand}</span>: {positive} positive reviews
+                <span className="text-indigo-400 font-semibold">{brand}</span>: {positive} positive reviews
               </div>
               <div className="ml-4 text-sm text-green-600">
                 Models: {products.join(", ")}
@@ -195,7 +195,7 @@ export default function GlobalAnalyticsSection({ data, selectedPhoneNames }: Glo
         <ul className="list-disc ml-6 mt-1 text-gray-200">
           {modelPerf.length ? modelPerf.map(({ name, positive }) => (
             <li key={name} className="mb-1">
-              <span className="text-blue-500 font-semibold">{name}</span>: {positive} positive reviews
+              <span className="text-indigo-400 font-semibold">{name}</span>: {positive} positive reviews
             </li>
           )) : <li className="text-gray-200">No model data available.</li>}
         </ul>

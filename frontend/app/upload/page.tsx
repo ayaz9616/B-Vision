@@ -10,54 +10,52 @@ export default function UploadPage() {
   const [dragActive, setDragActive] = useState(false);
   const router = useRouter();
 
-const backendUrl = process.env.NEXT_PUBLIC_BACKEND_API;
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_API;
 
-// console.log("Backend URL:", backendUrl); 
-
-const pollProgress = async (jobId: string) => {
-  let done = false;
-  while (!done) {
-    const res = await fetch(`${backendUrl}/progress/${jobId}`);
-    const data = await res.json();
-    setProgress(data.progress);
-    if (data.progress >= 100 || data.progress < 0) {
-      done = true;
-    } else {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+  const pollProgress = async (jobId: string) => {
+    let done = false;
+    while (!done) {
+      const res = await fetch(`${backendUrl}/progress/${jobId}`);
+      const data = await res.json();
+      setProgress(data.progress);
+      if (data.progress >= 100 || data.progress < 0) {
+        done = true;
+      } else {
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+      }
     }
-  }
-};
+  };
 
-const uploadAndAnalyze = async () => {
-  if (!file) return;
-  setLoading(true);
-  setProgress(0);
-  const formData = new FormData();
-  formData.append("file", file);
+  const uploadAndAnalyze = async () => {
+    if (!file) return;
+    setLoading(true);
+    setProgress(0);
+    const formData = new FormData();
+    formData.append("file", file);
 
-  const res = await fetch(`${backendUrl}/analyze`, {
-    method: "POST",
-    body: formData,
-  });
-  const data = await res.json();
-  if (!data.job_id) {
-    setLoading(false);
-    alert(data.error || "Failed to start analysis");
-    return;
-  }
-  const jobId = data.job_id;
+    const res = await fetch(`${backendUrl}/analyze`, {
+      method: "POST",
+      body: formData,
+    });
+    const data = await res.json();
+    if (!data.job_id) {
+      setLoading(false);
+      alert(data.error || "Failed to start analysis");
+      return;
+    }
+    const jobId = data.job_id;
 
-  await pollProgress(jobId);
+    await pollProgress(jobId);
 
-  const resultRes = await fetch(`${backendUrl}/result/${jobId}`);
-  const resultData = await resultRes.json();
-  localStorage.setItem("analysis", JSON.stringify(resultData));
-  setProgress(100);
-  setTimeout(() => {
-    setLoading(false);
-    router.push("/results");
-  }, 400);
-};
+    const resultRes = await fetch(`${backendUrl}/result/${jobId}`);
+    const resultData = await resultRes.json();
+    localStorage.setItem("analysis", JSON.stringify(resultData));
+    setProgress(100);
+    setTimeout(() => {
+      setLoading(false);
+      router.push("/results");
+    }, 400);
+  };
 
   const handleDrag = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -88,11 +86,29 @@ const uploadAndAnalyze = async () => {
         background: "radial-gradient(ellipse at 50% 40%, #17213a 0%, #0a0c23 100%)"
       }}
     >
+      <div className="absolute top-5 left-5">
+        <button
+          onClick={() => router.push('/')}
+          className="flex items-center gap-2 bg-[#1f2937] hover:bg-[#374151] text-white font-semibold px-4 py-2 rounded-xl shadow-md transition-all duration-300"
+        >
+          ⬅ Home
+        </button>
+      </div>
       <div className="bg-[#0a0c23] rounded-2xl shadow-2xl p-8 w-full max-w-sm flex flex-col items-center border border-[#23243a]">
         <h2 className="text-2xl font-bold text-white mb-2 text-center">Upload file</h2>
-        <p className="text-blue-100 mb-6 text-center text-base">
+        <p className="text-blue-100 mb-4 text-center text-base">
           Drag or drop your files here or click to upload
         </p>
+
+        {/* Download sample file button */}
+        <a 
+          href="/sample.csv" 
+          download 
+          className="mb-6 text-blue-300 hover:text-blue-400 underline text-sm"
+        >
+          Download Sample CSV Format
+        </a>
+
         <div
           className={`
             flex items-center justify-center mb-8 rounded-xl border-2 transition-colors duration-200 cursor-pointer w-32 h-32
@@ -120,6 +136,7 @@ const uploadAndAnalyze = async () => {
             <span className="text-blue-300 text-sm text-center px-2 break-all">{file.name}</span>
           )}
         </div>
+
         <button
           className="bg-[#4f46e5] hover:bg-[#6366f1] text-white font-semibold rounded-xl px-8 py-3 shadow-lg transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-blue-200 text-lg w-full disabled:opacity-60 disabled:cursor-not-allowed"
           onClick={uploadAndAnalyze}
@@ -127,6 +144,7 @@ const uploadAndAnalyze = async () => {
         >
           {loading ? 'Analyzing...' : 'Analyze'}
         </button>
+
         {loading && (
           <div className="w-full mt-6">
             <div className="mb-2 text-blue-300 font-semibold text-center">Analyzing... {progress}%</div>

@@ -47,10 +47,10 @@ export default function HomePage() {
           <h1 className="text-2xl sm:text-5xl font-bold text-white mb-10 tracking-tight animate-gradient-text bg-gradient-to-r from-blue-400 via-indigo-400 to-pink-400 bg-clip-text text-transparent">
             Think better with{" "}
             <span
-              className="italic font-semibold text-5xl text-indigo-300 tracking-wide"
+              className="font-semibold text-5xl text-indigo-400 tracking-wide"
               style={{ fontFamily: "Inter, Segoe UI, Arial, sans-serif" }}
             >
-              B Vision
+              B-Vision
             </span>
           </h1>
 

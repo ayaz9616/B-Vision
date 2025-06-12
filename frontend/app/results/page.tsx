@@ -7,6 +7,7 @@ import GlobalAnalyticsSection from './GlobalAnalyticsSection';
 import Loading from '../component/Loading';
 import domtoimage from 'dom-to-image-more';
 import jsPDF from 'jspdf';
+import DebugTable from './SentimentsSummary';
 
 interface OptionType {
   value: string;
@@ -107,7 +108,6 @@ export default function ResultsPage() {
   const [filteredData, setFilteredData] = useState<FilteredPhoneData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [showDebug, setShowDebug] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const chartRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
   const reportRef = useRef<HTMLDivElement>(null);
@@ -395,7 +395,7 @@ const handleDownloadPDF = async () => {
         style={{ background: 'radial-gradient(ellipse at 50% 40%, #17213a 0%, #0a0c23 100%)' }}
       >
         <div className="bg-[#0a0c23] rounded-2xl shadow-2xl p-8 w-full max-w-4xl flex flex-col items-center border border-[#23243a]">
-          <div className="flex justify-end w-full mb-4 space-x-4 bg-gradient-to-r from-blue-900 to-green-900 ">
+          <div className="flex justify-end w-full mb-4 space-x-4 bg-gradient-to-r from-blue-900 to-green-900 rounded-lg ">
             <div className='p-2 flex gap-2'>
               <button
                 onClick={handleDownloadPDF}
@@ -411,7 +411,7 @@ const handleDownloadPDF = async () => {
               </button>
             </div>
           </div>
-          <div className="bg-gradient-to-r from-blue-950 to-green-900  w-full   "  ref={reportRef}>
+          <div className="bg-gradient-to-r from-blue-950 to-green-900  w-full  rounded-lg "  ref={reportRef}>
             <div className='p-5'>
 
             
@@ -960,98 +960,12 @@ const handleDownloadPDF = async () => {
             Generate Report
           </button>
         </form>
-        <button
-          className="mt-4 text-xs font-semibold text-blue-400 underline hover:text-blue-600"
-          onClick={() => setShowDebug((v) => !v)}
-        >
-          {showDebug ? 'Hide Debug' : 'Show Debug'} Data
-        </button>
-        {showDebug && <DebugTable data={data} />}
+        
+        <div className="mt-4">
+          <DebugTable data={data} />
+        </div>
+
       </div>
-    </div>
-  );
-}
-
-function DebugTable({ data }: { data: unknown }) {
-  return (
-    <div className="mt-4 p-2 bg-[#181b23] rounded text-xs max-h-96 overflow-auto w-full text-left text-white border border-[#23243a]">
-      <table className="min-w-full border border-gray-300">
-        <thead className="bg-gray-800 sticky top-0">
-          <tr>
-            <th className="px-2 py-1 border-b border-gray-300 text-left">Key</th>
-            <th className="px-2 py-1 border-b border-gray-300 text-left">Value</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tbody>
-            {(() => {
-              if (data && typeof data === 'object' && data !== null) {
-                return Object.entries(data as Record<string, unknown>).map(([key, value]) => (
-                  <tr key={key} className="border-b border-gray-700 align-top">
-                    <td className="px-2 py-1 font-semibold text-blue-300 align-top">{key}</td>
-                    <td className="px-2 py-1 align-top whitespace-pre-wrap break-all text-white">
-                      {Array.isArray(value) ? (
-                        <div className="overflow-x-auto max-h-40">
-                          <table className="min-w-full border border-gray-700 text-xs">
-                            <thead className="bg-gray-900">
-                              <tr>
-                                {value.length > 0 && typeof value[0] === 'object' ? (
-                                  Object.keys(value[0] as Record<string, unknown>).map((col) => (
-                                    <th key={col} className="px-1 py-0.5 border-b border-gray-700 text-left">
-                                      {col}
-                                    </th>
-                                  ))
-                                ) : (
-                                  <th className="px-1 py-0.5 border-b border-gray-700 text-left">Value</th>
-                                )}
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {value.length > 0 && typeof value[0] === 'object'
-                                ? value.map((row, i) => (
-                                    <tr key={i} className="border-b border-gray-800">
-                                      {Object.values(row as Record<string, unknown>).map((cell, j) => (
-                                        <td key={j} className="px-1 py-0.5 align-top border-b border-gray-800 text-white">
-                                          {String(cell)}
-                                        </td>
-                                      ))}
-                                    </tr>
-                                  ))
-                                : value.map((v, i) => (
-                                    <tr key={i} className="border-b border-gray-800">
-                                      <td className="px-1 py-0.5 align-top border-b border-gray-800 text-white">{String(v)}</td>
-                                    </tr>
-                                  ))}
-                            </tbody>
-                          </table>
-                        </div>
-                      ) : typeof value === 'object' && value !== null ? (
-                        <div className="overflow-x-auto max-h-40">
-                          <table className="min-w-full border border-gray-700 text-xs">
-                            <tbody>
-                              {Object.entries(value as Record<string, unknown>).map(([k, v]) => (
-                                <tr key={k} className="border-b border-gray-800">
-                                  <td className="px-1 py-0.5 font-semibold text-blue-300 align-top">{k}</td>
-                                  <td className="px-1 py-0.5 align-top text-white">{String(v)}</td>
-                                </tr>
-                              ))}
-                            </tbody>
-                          </table>
-                        </div>
-                      ) : (
-                        String(value)
-                      )}
-                    </td>
-                  </tr>
-                ));
-              } else {
-                return null;
-              }
-            })()}
-          </tbody>
-
-        </tbody>
-      </table>
     </div>
   );
 }

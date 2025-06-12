@@ -13,12 +13,12 @@ const Navbar: React.FC = () => {
 
         <Link href="/" className="flex items-center gap-2">
           <img
-            src="/logo.png"
+            src="/logo1.jpg"
             alt="Logo"
             className="h-12 w-12 object-contain rounded-full shadow-md border border-indigo-400/20"
           />
-          <span className="italic font-semibold text-3xl text-indigo-300 tracking-wide" style={{ fontFamily: 'Inter, Segoe UI, Arial, sans-serif' }}>
-            B Vision
+          <span className="font-semibold text-3xl text-indigo-400 tracking-wide" style={{ fontFamily: 'Inter, Segoe UI, Arial, sans-serif' }}>
+            B-Vision
           </span>
         </Link>
 

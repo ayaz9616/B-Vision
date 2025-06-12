@@ -6,9 +6,7 @@ export default function DataHeroSection() {
       <div className="w-full flex items-center justify-center relative group">
         {/* Top text overlay */}
         <div className=" text-3xl sm:text-5xl absolute -top-14 left-1/2 -translate-x-1/2 z-20 text-center w-full px-4 pointer-events-none">
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white mb-4 text-center text-white text-2xl sm:text-4xl font-extrabold drop-shadow-lg">
-            Think better with <span className="text-indigo-400">Reflect</span>
-          </h2>
+          
         </div>
         <Image
           src="/brands/3rdsec.png"

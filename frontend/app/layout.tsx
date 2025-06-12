@@ -21,11 +21,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "B-Vision: Smart Review Sentiment Analyzer",
     description: "Upload customer reviews and visualize feature-based sentiment insights for smartphones.",
-    url: "https://your-domain.com",
+    url: "https://b-vision-frontend.vercel.app/",
     siteName: "B-Vision",
     images: [
       {
-        url: "/logo.png", 
+        url: "/favicon.png", 
         width: 1200,
         height: 630,
         alt: "B-Vision Logo",
@@ -38,12 +38,12 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "B-Vision: Smart Review Sentiment Analyzer",
     description: "Visualize feature-based sentiment analysis for smartphone reviews with B-Vision.",
-    images: ["/logo.png"],
+    images: ["/logo1.jpg"],
     creator: "@your_twitter_handle",
   },
-  icons: {
-    icon: "/favicon.png",
-  },
+  icons: [
+    { url: "/logo1.jpg", type: "image/jpg" }
+  ],
   robots: {
     index: true,
     follow: true,
