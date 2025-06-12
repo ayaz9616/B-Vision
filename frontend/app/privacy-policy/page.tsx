@@ -30,7 +30,7 @@ export default function PrivacyPolicyPage() {
           <section>
             <h2 className="text-2xl font-semibold mb-2 text-indigo-300">1. Introduction</h2>
             <p>
-              Welcome to <span className="font-bold text-indigo-400">B-Vision</span>. Your privacy is important to us.
+              Welcome to <span className="font-bold text-indigo-400">B Vision</span>. Your privacy is important to us.
               This Privacy Policy explains how we collect, use, and protect your information.
             </p>
           </section>

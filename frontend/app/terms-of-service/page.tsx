@@ -26,22 +26,22 @@ export default function TermsOfServicePage() {
         </p>
 
         <div className="space-y-6 text-slate-300 leading-relaxed text-lg">
-          <p>Welcome to B-Vision. By accessing or using our platform, you agree to comply with and be bound by these Terms of Service.</p>
+          <p>Welcome to B Vision. By accessing or using our platform, you agree to comply with and be bound by these Terms of Service.</p>
 
           <h2 className="text-2xl font-bold text-indigo-300">1. Use of Service</h2>
-          <p>You agree to use B-Vision only for lawful purposes and in accordance with these Terms. You are responsible for all content you upload or process using our platform.</p>
+          <p>You agree to use B Vision only for lawful purposes and in accordance with these Terms. You are responsible for all content you upload or process using our platform.</p>
 
           <h2 className="text-2xl font-bold text-indigo-300">2. Intellectual Property</h2>
-          <p>All content, trademarks, logos, and intellectual property on B-Vision are owned by us or our licensors. You may not reproduce or distribute any part of our service without our prior written consent.</p>
+          <p>All content, trademarks, logos, and intellectual property on B Vision are owned by us or our licensors. You may not reproduce or distribute any part of our service without our prior written consent.</p>
 
           <h2 className="text-2xl font-bold text-indigo-300">3. Account Termination</h2>
           <p>We reserve the right to suspend or terminate your access if you violate these Terms or engage in any harmful or fraudulent activities.</p>
 
           <h2 className="text-2xl font-bold text-indigo-300">4. Limitation of Liability</h2>
-          <p>B-Vision is provided "as is" without warranties of any kind. We are not liable for any damages arising from your use of our platform.</p>
+          <p>B Vision is provided "as is" without warranties of any kind. We are not liable for any damages arising from your use of our platform.</p>
 
           <h2 className="text-2xl font-bold text-indigo-300">5. Modifications</h2>
-          <p>We may update these Terms at any time. Continued use of B-Vision after changes means you accept the updated Terms.</p>
+          <p>We may update these Terms at any time. Continued use of B Vision after changes means you accept the updated Terms.</p>
 
           <h2 className="text-2xl font-bold text-indigo-300">6. Contact</h2>
           <p>If you have any questions, please contact us at: <a href="mailto:ayaz9616835404@gmail.com" className="text-green-400 hover:underline">ayaz9616835404@gmail.com</a></p>
