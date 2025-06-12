@@ -1,32 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sentiment Analysis on Mobile Phone Reviews</title>
-  
-    body {
-      background-color: #1a202c;
-      color: #e2e8f0;
-      font-family: 'Inter', sans-serif;
-    }
-    a {
-      color: #63b3ed;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    pre, code {
-      background-color: #2d3748;
-      border-radius: 0.375rem;
-      padding: 0.5rem;
-      color: #e2e8f0;
-    }
-    pre {
-      overflow-x: auto;
-    }
-  </style>
+
 </head>
 <body class="max-w-4xl mx-auto p-6">
   <header class="text-center mb-8">
