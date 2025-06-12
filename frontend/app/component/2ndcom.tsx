@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { FaMicrophone, FaRegFileAlt, FaListAlt, FaSpellCheck, FaSave } from "react-icons/fa";
+import { FaChartLine, FaSearch, FaBalanceScale, FaUsers, FaStore, FaFileDownload } from "react-icons/fa";
 
 export default function FeaturesSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -10,19 +10,16 @@ export default function FeaturesSection() {
 
     const handleScroll = () => {
       const sectionRect = section.getBoundingClientRect();
-      // Only trigger when section is in viewport
       if (sectionRect.top < window.innerHeight && sectionRect.bottom > 0) {
         const elements = section.querySelectorAll(".animate-on-scroll");
         elements.forEach((el: Element) => {
           (el as HTMLElement).classList.add("animated");
         });
-        // Remove scroll listener after animation triggers
         window.removeEventListener("scroll", handleScroll);
       }
     };
 
     window.addEventListener("scroll", handleScroll);
-    // Trigger once in case already in view
     handleScroll();
 
     return () => window.removeEventListener("scroll", handleScroll);
@@ -35,55 +32,55 @@ export default function FeaturesSection() {
     >
       <div className="mb-4">
         <span className="px-4 py-1 rounded-full bg-[#18192a] text-indigo-300 text-xs font-semibold tracking-wide shadow animate-fade-in animate-on-scroll">
-          All your notes, connected
+          Powerful Insights at Your Fingertips
         </span>
       </div>
       <h2
         className="text-3xl sm:text-5xl font-extrabold text-white mb-4 text-center opacity-0 animate-fade-in-down animate-on-scroll"
         style={{ animationFillMode: "forwards", animationDelay: "0.2s" }}
       >
-        Give Yourself <span className="text-indigo-400">Superpowers</span>
+        Unlock <span className="text-indigo-400">Deep Analytics</span>
       </h2>
       <p className="text-slate-300 text-base sm:text-lg mb-12 max-w-2xl text-center animate-fade-in animate-on-scroll">
-        Mirror the way your mind works by associating notes through backlinks.<br className="hidden sm:block" />
-        Reflect builds you a second brain that you can reference anytime.
+        Transform raw customer reviews into actionable insights. Our AI-powered sentiment platform analyzes feature-level feedback, tracks trends, compares products, and helps businesses make smarter decisions backed by real data.
       </p>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 w-full max-w-5xl">
         {[
           {
-            icon: <FaMicrophone className="text-3xl text-indigo-400 mb-3 animate-bounce" />,
-            title: "Transcribe voice notes",
-            desc: "with human-level accuracy",
+            icon: <FaSearch className="text-3xl text-indigo-400 mb-3 animate-bounce" />,
+            title: "Feature-Level Sentiment",
+            desc: "Pinpoint opinions on specific features like camera, battery, display, and more.",
             delay: "delay-0"
           },
           {
-            icon: <FaRegFileAlt className="text-3xl text-indigo-400 mb-3 animate-pulse" />,
-            title: "Generate article outlines",
-            desc: "from your scattered thoughts",
+            icon: <FaChartLine className="text-3xl text-indigo-400 mb-3 animate-pulse" />,
+            title: "Trend & Monthly Analytics",
+            desc: "Visualize how customer sentiment evolves over time, month-by-month.",
             delay: "delay-100"
           },
           {
-            icon: <FaListAlt className="text-3xl text-indigo-400 mb-3 animate-bounce" />,
-            title: "List key takeaways and action",
-            desc: "items from your meeting notes",
+            icon: <FaBalanceScale className="text-3xl text-indigo-400 mb-3 animate-bounce" />,
+            title: "Brand & Product Comparison",
+            desc: "Compare competing models and brands across key sentiment metrics.",
             delay: "delay-200"
           },
           {
-            icon: <FaSpellCheck className="text-3xl text-indigo-400 mb-3 animate-pulse" />,
-            title: "Fix grammar, spelling,",
-            desc: "and improve your writing",
+            icon: <FaUsers className="text-3xl text-indigo-400 mb-3 animate-pulse" />,
+            title: "Demographic Insights",
+            desc: "Segment sentiment data by age, gender, and verified purchase status.",
             delay: "delay-300"
           },
           {
-            icon: <FaSpellCheck className="text-3xl text-indigo-400 mb-3 animate-bounce" />,
-            title: "Fix grammar, spelling,",
-            desc: "and improve your writing",
+            icon: <FaStore className="text-3xl text-indigo-400 mb-3 animate-bounce" />,
+            title: "Platform & Rating Analysis",
+            desc: "Break down sentiment by star ratings and e-commerce platforms.",
             delay: "delay-400"
           },
           {
-            icon: <FaSave className="text-3xl text-indigo-400 mb-3 animate-pulse" />,
-            title: "Save your own",
-            desc: "custom prompts",
+            icon: <FaFileDownload className="text-3xl text-indigo-400 mb-3 animate-pulse" />,
+            title: "Exportable PDF Reports",
+            desc: "Download complete, filterable reports for in-depth analysis.",
             delay: "delay-500"
           },
         ].map((feature, idx) => (
@@ -98,29 +95,14 @@ export default function FeaturesSection() {
           </div>
         ))}
       </div>
-      {/* Tailwind custom keyframes for fade-in and fade-in-up */}
+
       <style jsx>{`
-        @keyframes fade-in {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-        .animate-fade-in {
-          animation: fade-in 1s ease forwards;
-        }
-        @keyframes fade-in-up {
-          from { opacity: 0; transform: translateY(40px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in-up {
-          animation: fade-in-up 0.8s cubic-bezier(0.4,0,0.2,1) forwards;
-        }
-        @keyframes fade-in-down {
-          from { opacity: 0; transform: translateY(-40px);}
-          to { opacity: 1; transform: translateY(0);}
-        }
-        .animate-fade-in-down {
-          animation: fade-in-down 1s cubic-bezier(0.4,0,0.2,1) forwards;
-        }
+        @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+        .animate-fade-in { animation: fade-in 1s ease forwards; }
+        @keyframes fade-in-up { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in-up { animation: fade-in-up 0.8s cubic-bezier(0.4,0,0.2,1) forwards; }
+        @keyframes fade-in-down { from { opacity: 0; transform: translateY(-40px);} to { opacity: 1; transform: translateY(0);} }
+        .animate-fade-in-down { animation: fade-in-down 1s cubic-bezier(0.4,0,0.2,1) forwards; }
         .delay-0 { animation-delay: 0.5s; }
         .delay-100 { animation-delay: 0.65s; }
         .delay-200 { animation-delay: 0.8s; }

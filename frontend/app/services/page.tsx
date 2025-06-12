@@ -67,12 +67,12 @@ export default function ProductUSP() {
 
       <Navbar />
       <section className="w-full py-16 flex flex-col items-center relative">
-        {/* Decorative blurred blobs */}
+
         <div className="absolute top-0 left-0 w-80 h-80 bg-indigo-900 opacity-20 rounded-full blur-3xl -z-10 animate-pulse"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-800 opacity-20 rounded-full blur-3xl -z-10 animate-pulse"></div>
-        {/* Glass Card */}
+
         <div className="max-w-7xl w-full flex flex-col md:flex-row gap-12 items-center justify-between bg-white/5 backdrop-blur-xl rounded-3xl border border-[#23243a] shadow-2xl px-8 py-12">
-          {/* Left Side: Text */}
+      
           <div className="flex-1 flex flex-col gap-10">
             <div>
               <h2 className="text-4xl sm:text-5xl font-extrabold text-indigo-100 mb-2 tracking-tight drop-shadow-lg">
@@ -82,7 +82,6 @@ export default function ProductUSP() {
                 Unlock deep, actionable insights from your customer reviews with our advanced, feature-aware sentiment analytics platform.
               </p>
             </div>
-            {/* Analytics List */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {analytics.map((item) => (
                 <div
@@ -97,7 +96,6 @@ export default function ProductUSP() {
                 </div>
               ))}
             </div>
-            {/* How We Help Businesses Section */}
             <div>
               <h4 className="text-indigo-300 font-semibold mb-2 mt-8 text-base tracking-wide">
                 How We Help Businesses
@@ -118,7 +116,6 @@ export default function ProductUSP() {
               </div>
             </div>
           </div>
-          {/* Right Side: Image */}
           <div className="flex-1 flex items-center justify-center relative">
             <div className="rounded-3xl overflow-hidden shadow-2xl border-2 border-indigo-800/40 hover:scale-105 transition-transform duration-500 bg-[#181b23]/80">
               <Image
@@ -130,7 +127,6 @@ export default function ProductUSP() {
                 priority
               />
             </div>
-            {/* Decorative gradient blob */}
             <div className="absolute -z-10 -top-10 -right-10 w-60 h-60 bg-indigo-900 opacity-30 rounded-full blur-3xl animate-pulse"></div>
           </div>
         </div>

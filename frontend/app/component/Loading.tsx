@@ -6,8 +6,8 @@ export default function LoadingScreen() {
   useEffect(() => {
     const interval = setInterval(() => {
       setBars(bars => bars.map(height => {
-        let delta = Math.floor(Math.random() * 30 - 15); // Random up/down movement
-        let newHeight = Math.min(90, Math.max(10, height + delta));
+        const delta = Math.floor(Math.random() * 30 - 15); 
+        const newHeight = Math.min(90, Math.max(10, height + delta));
         return newHeight;
       }));
     }, 500);

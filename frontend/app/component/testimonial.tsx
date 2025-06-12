@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 const testimonials = [
   {
     name: "Sean Rose",
@@ -66,7 +64,7 @@ const testimonials = [
 export default function TestimonialSection() {
   return (
     <section className="relative w-full bg-[#0a0c23] py-20 px-2 flex flex-col items-center overflow-hidden">
-      {/* Fade overlays only on medium and up */}
+
       <div className="hidden md:block pointer-events-none absolute left-0 top-0 h-full w-1/4 z-10 bg-gradient-to-r from-[#0a0c23] via-[#0a0c23]/80 to-transparent" />
       <div className="hidden md:block pointer-events-none absolute right-0 top-0 h-full w-1/4 z-10 bg-gradient-to-l from-[#0a0c23] via-[#0a0c23]/80 to-transparent" />
 

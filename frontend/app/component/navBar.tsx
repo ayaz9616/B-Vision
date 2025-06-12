@@ -1,19 +1,16 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const router = useRouter();
 
-  // Optional: close menu on route change (for mobile)
   const handleNavClick = () => setIsOpen(false);
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-[#0a0c23]/80 border-b border-white/10 backdrop-blur-md shadow-lg">
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center h-16">
-        {/* Logo */}
+
         <Link href="/" className="flex items-center gap-2">
           <img
             src="/logo.png"
@@ -25,7 +22,7 @@ const Navbar: React.FC = () => {
           </span>
         </Link>
 
-        {/* Desktop menu */}
+
         <div className="hidden md:flex gap-10 items-center">
           <Link
             href="/"
@@ -50,7 +47,6 @@ const Navbar: React.FC = () => {
           </Link>
         </div>
 
-        {/* Hamburger icon for mobile */}
         <div className="md:hidden">
           <button
             onClick={() => setIsOpen(!isOpen)}
@@ -85,7 +81,6 @@ const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile menu */}
       <div
         className={`md:hidden flex flex-col bg-[#0a0c23]/95 border-t border-white/10 px-6 py-4 gap-4 absolute w-full left-0 transition-all duration-300 ${
           isOpen ? "top-16 opacity-100 pointer-events-auto" : "-top-96 opacity-0 pointer-events-none"

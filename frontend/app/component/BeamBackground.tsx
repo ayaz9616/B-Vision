@@ -34,23 +34,23 @@ export default function BeamBackground() {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      for (let beam of beams) {
-        // Update position
+      for (const beam of beams) {
+
         beam.x += beam.vx;
         beam.y += beam.vy;
 
-        // Bounce off edges
+
         if (beam.x < 0 || beam.x > canvas.width) beam.vx *= -1;
         if (beam.y < 0 || beam.y > canvas.height) beam.vy *= -1;
 
-        // Update angle
+
         beam.angle += 0.002;
 
-        // Calculate end point
+
         const endX = beam.x + beam.length * Math.cos(beam.angle);
         const endY = beam.y + beam.length * Math.sin(beam.angle);
 
-        // Draw beam
+
         ctx.beginPath();
         ctx.moveTo(beam.x, beam.y);
         ctx.lineTo(endX, endY);

@@ -7,8 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
+    
   },
   "dependencies": {
+    "dom-to-image-more": "^3.6.0",
+    "framer-motion": "^12.17.0",
     "jspdf": "^3.0.1",
     "jspdf-autotable": "^5.0.2",
     "next": "15.3.3",

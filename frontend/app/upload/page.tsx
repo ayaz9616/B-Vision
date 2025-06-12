@@ -10,13 +10,10 @@ export default function UploadPage() {
   const [dragActive, setDragActive] = useState(false);
   const router = useRouter();
 
-  // Progress polling
-  
-// const backendUrl = process.env.NEXT_PUBLIC_BACKEND_API;
-const backendUrl = "https://b-vision.onrender.com";
+const backendUrl = process.env.NEXT_PUBLIC_BACKEND_API;
 
 // console.log("Backend URL:", backendUrl); 
-// Progress polling
+
 const pollProgress = async (jobId: string) => {
   let done = false;
   while (!done) {
@@ -31,7 +28,6 @@ const pollProgress = async (jobId: string) => {
   }
 };
 
-// Upload and analyze
 const uploadAndAnalyze = async () => {
   if (!file) return;
   setLoading(true);
@@ -63,8 +59,6 @@ const uploadAndAnalyze = async () => {
   }, 400);
 };
 
-
-  // Drag & Drop handlers
   const handleDrag = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
@@ -133,7 +127,6 @@ const uploadAndAnalyze = async () => {
         >
           {loading ? 'Analyzing...' : 'Analyze'}
         </button>
-        {/* Progress Bar */}
         {loading && (
           <div className="w-full mt-6">
             <div className="mb-2 text-blue-300 font-semibold text-center">Analyzing... {progress}%</div>
