@@ -4,7 +4,6 @@ export default function DataHeroSection() {
   return (
     <section className="relative w-full min-h-[400px] flex items-center justify-center bg-[#0a0c23] py-12 px-2">
       <div className="w-full flex items-center justify-center relative group">
-        {/* Top text overlay */}
         <div className=" text-3xl sm:text-5xl absolute -top-14 left-1/2 -translate-x-1/2 z-20 text-center w-full px-4 pointer-events-none">
           
         </div>

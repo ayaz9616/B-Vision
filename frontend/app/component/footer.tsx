@@ -2,7 +2,6 @@ export default function Footer() {
   return (
     <footer className="w-full bg-[#0a0c23] border-t border-[#23243a] py-10 px-6 flex flex-col items-center relative overflow-hidden">
 
-      {/* Glowing gradient background bubbles */}
       <div className="absolute -top-20 -left-20 w-96 h-96 bg-purple-500 opacity-10 rounded-full filter blur-3xl animate-pulse z-0"></div>
       <div className="absolute -bottom-32 right-10 w-[500px] h-[500px] bg-blue-500 opacity-10 rounded-full filter blur-3xl animate-pulse z-0"></div>
 

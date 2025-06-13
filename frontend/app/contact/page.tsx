@@ -17,7 +17,6 @@ export default function ContactPage() {
       <div className='mt-15'>
       <Navbar />
 
-      {/* Background floating blobs */}
       <div className="absolute w-[600px] h-[600px] bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse top-0 left-0"></div>
       <div className="absolute w-[600px] h-[600px] bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse bottom-0 right-0"></div>
 

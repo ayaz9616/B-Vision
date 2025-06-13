@@ -51,7 +51,6 @@ export const metadata: Metadata = {
   category: "Technology",
 };
 
-// ✅ fix the themeColor warning:
 export const viewport: Viewport = {
   themeColor: "#ffffff",
 };

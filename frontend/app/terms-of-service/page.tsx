@@ -12,7 +12,7 @@ export default function TermsOfServicePage() {
 
   return (
     <div className="relative min-h-screen w-full bg-[#0a0c23] text-white px-6 py-16">
-      {/* Background bubbles */}
+
       <div className="absolute -top-32 -left-32 w-96 h-96 bg-purple-500 opacity-10 rounded-full filter blur-3xl animate-pulse z-0"></div>
       <div className="absolute bottom-10 right-10 w-[400px] h-[400px] bg-blue-500 opacity-10 rounded-full filter blur-3xl animate-pulse z-0"></div>
 
@@ -38,7 +38,7 @@ export default function TermsOfServicePage() {
           <p>We reserve the right to suspend or terminate your access if you violate these Terms or engage in any harmful or fraudulent activities.</p>
 
           <h2 className="text-2xl font-bold text-indigo-300">4. Limitation of Liability</h2>
-          <p>B Vision is provided "as is" without warranties of any kind. We are not liable for any damages arising from your use of our platform.</p>
+          <p>B Vision is provided as is without warranties of any kind. We are not liable for any damages arising from your use of our platform.</p>
 
           <h2 className="text-2xl font-bold text-indigo-300">5. Modifications</h2>
           <p>We may update these Terms at any time. Continued use of B Vision after changes means you accept the updated Terms.</p>

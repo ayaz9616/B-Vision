@@ -236,13 +236,6 @@ const handleDownloadPDF = async () => {
   try {
     const element = reportRef.current;
 
-    // Clean shadows/outlines/borders
-    // element.querySelectorAll("*").forEach((el) => {
-    //   el.style.boxShadow = 'none';
-    //   el.style.outline = 'none';
-    //   el.style.border = 'none';
-    // });
-
     element.querySelectorAll("*").forEach((el) => {
       if (el instanceof HTMLElement) {
         el.style.boxShadow = 'none';
@@ -304,18 +297,6 @@ const handleDownloadPDF = async () => {
         { name: 'Sentiment by Age', data: phoneData.sentiment_by_age },
       ];
       sections.forEach((section) => {
-        // if (!section.data) return;
-        // csvRows.push(`## ${section.name} ##`);
-        // const headers = section.data.length > 0 ? Object.keys(section.data[0] as object) : [];
-        // if (headers.length === 0) return;
-        // csvRows.push(headers.map(h => `"${h.replace(/"/g, '""')}"`).join(','));
-        // section.data.forEach((item) => {
-        //   const row = headers.map((header) => {
-        //     const value = item[header] ?? '';
-        //     return `"${String(value).replace(/"/g, '""')}"`;
-        //   });
-        //   csvRows.push(row.join(','));
-        // });
 
         if (!section.data) return;
         csvRows.push(`## ${section.name} ##`);
@@ -323,7 +304,7 @@ const handleDownloadPDF = async () => {
         if (headers.length === 0) return;
         csvRows.push(headers.map(h => `"${h.replace(/"/g, '""')}"`).join(','));
         section.data.forEach((item) => {
-          const obj = item as Record<string, unknown>;   // change any to unknown
+          const obj = item as Record<string, unknown>; 
           const row = headers.map((header) => {
             const value = obj[header] ?? '';
             return `"${String(value).replace(/"/g, '""')}"`;

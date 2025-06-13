@@ -100,7 +100,6 @@ export default function UploadPage() {
           Drag or drop your files here or click to upload
         </p>
 
-        {/* Download sample file button */}
         <a 
           href="/sample.csv" 
           download 
