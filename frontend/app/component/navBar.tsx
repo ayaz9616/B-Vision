@@ -101,6 +101,13 @@ const Navbar: React.FC = () => {
           Home
         </Link>
         <Link
+          href="/demo"
+          onClick={handleNavClick}
+          className="text-white font-semibold text-base hover:text-indigo-300 transition-colors"
+        >
+          Demo
+        </Link>
+        <Link
           href="/services"
           onClick={handleNavClick}
           className="text-white font-semibold text-base hover:text-indigo-300 transition-colors"
