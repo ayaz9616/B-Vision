@@ -41,64 +41,92 @@ interface GlobalAnalyticsSectionProps {
 }
 
 export default function GlobalAnalyticsSection({ data, selectedPhoneNames }: GlobalAnalyticsSectionProps) {
+  // Helper function to get full phone name (same as in results page)
+  function getFullPhoneName(brand?: string, productName?: string) {
+    if (!productName) return '';
+    return `${brand ? brand + ' ' : ''}${productName}`.trim();
+  }
+
   const ageFeatureMap = (() => {
-    if (!data?.feature_summary?.length) return [];
+    if (!data?.feature_summary?.length || !data?.sentiment_by_age?.length) return [];
 
-
+    // Filter features for selected phones using proper name matching
     const relevantFeatures = data.feature_summary.filter(f => {
-      return selectedPhoneNames.includes(f["Product Name"]);
+      const fullName = getFullPhoneName(f.Brand, f["Product Name"]);
+      return selectedPhoneNames.includes(fullName);
     });
 
     if (!relevantFeatures.length) {
-
       console.warn('No relevant features found for selected phones.');
-      console.warn('Available product names in data:', Array.from(new Set(data.feature_summary.map(f => f["Product Name"]))));
+      console.warn('Available product names in data:', Array.from(new Set(data.feature_summary.map(f => getFullPhoneName(f.Brand, f["Product Name"])))));
       console.warn('Selected product names:', selectedPhoneNames);
       return [];
     }
 
+    // Filter age data for selected phones
+    const relevantAgeData = data.sentiment_by_age.filter(a => {
+      const fullName = getFullPhoneName(a.Brand, a["Product Name"]);
+      return selectedPhoneNames.includes(fullName);
+    });
+
+    if (!relevantAgeData.length) {
+      console.warn('No relevant age data found for selected phones.');
+      return [];
+    }
+
+    // Calculate total sentiment per age group
+    const ageTotals: Record<string, { POSITIVE: number; NEGATIVE: number }> = {};
+    relevantAgeData.forEach(ageData => {
+      if (!ageData.Age) return;
+      if (!ageTotals[ageData.Age]) {
+        ageTotals[ageData.Age] = { POSITIVE: 0, NEGATIVE: 0 };
+      }
+      ageTotals[ageData.Age].POSITIVE += ageData.POSITIVE || 0;
+      ageTotals[ageData.Age].NEGATIVE += ageData.NEGATIVE || 0;
+    });
+
+    // Calculate total sentiment per feature
+    const featureTotals: Record<string, { POSITIVE: number; NEGATIVE: number }> = {};
+    relevantFeatures.forEach(f => {
+      if (!f.feature) return;
+      if (!featureTotals[f.feature]) {
+        featureTotals[f.feature] = { POSITIVE: 0, NEGATIVE: 0 };
+      }
+      featureTotals[f.feature].POSITIVE += f.POSITIVE || 0;
+      featureTotals[f.feature].NEGATIVE += f.NEGATIVE || 0;
+    });
+
+    // Calculate overall sentiment distribution
+    const totalPositive = Object.values(featureTotals).reduce((sum, f) => sum + f.POSITIVE, 0);
+    const totalNegative = Object.values(featureTotals).reduce((sum, f) => sum + f.NEGATIVE, 0);
+
     const map: Record<string, { feature: string; POSITIVE: number; NEGATIVE: number; totalReviews: number }[]> = {};
     
-    relevantFeatures.forEach(f => {
-      if (!f.Age || !f.feature) return;
-      if (!map[f.Age]) map[f.Age] = [];
-      const existing = map[f.Age].find(x => x.feature === f.feature);
-      if (existing) {
-        existing.POSITIVE += f.POSITIVE;
-        existing.NEGATIVE += f.NEGATIVE;
-        existing.totalReviews += (f.POSITIVE + f.NEGATIVE);
-      } else {
-        map[f.Age].push({ 
-          feature: f.feature, 
-          POSITIVE: f.POSITIVE,
-          NEGATIVE: f.NEGATIVE,
-          totalReviews: f.POSITIVE + f.NEGATIVE 
-        });
-      }
-    });
-    if (data.sentiment_by_age?.length) {
-      data.sentiment_by_age.forEach(a => {
-        if (!selectedPhoneNames.includes(a["Product Name"])) return;
-        if (!map[a.Age]) map[a.Age] = [];
-        const relevantFeaturesForProduct = relevantFeatures.filter(f => f["Product Name"] === a["Product Name"]);
-        relevantFeaturesForProduct.forEach(f => {
-          if (!f.feature) return;
-          const existing = map[a.Age].find(x => x.feature === f.feature);
-          if (existing) {
-            existing.POSITIVE += a.POSITIVE;
-            existing.NEGATIVE += a.NEGATIVE;
-            existing.totalReviews += (a.POSITIVE + a.NEGATIVE);
-          } else {
-            map[a.Age].push({
-              feature: f.feature,
-              POSITIVE: a.POSITIVE,
-              NEGATIVE: a.NEGATIVE,
-              totalReviews: a.POSITIVE + a.NEGATIVE
-            });
-          }
-        });
+    // For each age group, distribute sentiment based on feature popularity
+    Object.entries(ageTotals).forEach(([age, ageSentiment]) => {
+      if (!map[age]) map[age] = [];
+      
+      Object.entries(featureTotals).forEach(([feature, featureSentiment]) => {
+        // Calculate feature's proportion of total sentiment
+        const featureProportion = totalPositive + totalNegative > 0 
+          ? (featureSentiment.POSITIVE + featureSentiment.NEGATIVE) / (totalPositive + totalNegative)
+          : 0;
+        
+        // Distribute age sentiment based on feature proportion
+        const distributedPositive = Math.round(ageSentiment.POSITIVE * featureProportion);
+        const distributedNegative = Math.round(ageSentiment.NEGATIVE * featureProportion);
+        
+        if (distributedPositive + distributedNegative > 0) {
+          map[age].push({
+            feature,
+            POSITIVE: distributedPositive,
+            NEGATIVE: distributedNegative,
+            totalReviews: distributedPositive + distributedNegative
+          });
+        }
       });
-    }
+    });
+
     return Object.entries(map).map(([age, arr]) => {
       const featuresWithEnoughReviews = arr.filter(x => x.totalReviews >= 5);
       if (!featuresWithEnoughReviews.length) return null;
@@ -120,8 +148,12 @@ export default function GlobalAnalyticsSection({ data, selectedPhoneNames }: Glo
   const brandPerf = (() => {
     if (!data?.sentiment_by_brand?.length) return [];
     const brandMap = new Map<string, { brand: string; positive: number; products: Set<string> }>();
+    
     data.sentiment_by_brand.forEach((b: ProductSummary) => {
       if (!b.Brand) return;
+      const fullName = getFullPhoneName(b.Brand, b["Product Name"]);
+      if (!selectedPhoneNames.includes(fullName)) return;
+      
       if (!brandMap.has(b.Brand)) {
         brandMap.set(b.Brand, { brand: b.Brand, positive: 0, products: new Set() });
       }
@@ -131,6 +163,7 @@ export default function GlobalAnalyticsSection({ data, selectedPhoneNames }: Glo
         brandData.products.add(b["Product Name"]);
       }
     });
+    
     return Array.from(brandMap.values())
       .map(data => ({
         ...data,
@@ -142,14 +175,19 @@ export default function GlobalAnalyticsSection({ data, selectedPhoneNames }: Glo
   const modelPerf = (() => {
     if (!data?.sentiment_by_product?.length) return [];
     const modelMap = new Map<string, { name: string; positive: number }>();
+    
     data.sentiment_by_product.forEach((m: ProductSummary) => {
       if (!m["Product Name"]) return;
+      const fullName = getFullPhoneName(m.Brand, m["Product Name"]);
+      if (!selectedPhoneNames.includes(fullName)) return;
+      
       if (!modelMap.has(m["Product Name"])) {
         modelMap.set(m["Product Name"], { name: m["Product Name"], positive: 0 });
       }
       const model = modelMap.get(m["Product Name"])!;
       model.positive += (m.POSITIVE || 0);
     });
+    
     return Array.from(modelMap.values())
       .sort((a, b) => b.positive - a.positive)
   })();

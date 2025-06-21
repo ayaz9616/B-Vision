@@ -800,7 +800,15 @@ const handleDownloadPDF = async () => {
                 <AnalyticsSection phoneData={phoneData} />
               </div>
             ))}
-            <GlobalAnalyticsSection data={data!} selectedPhoneNames={filteredData.map((fd) => fd.phone)} />
+            <GlobalAnalyticsSection 
+              data={{
+                feature_summary: filteredData.flatMap(fd => fd.feature_summary),
+                sentiment_by_brand: filteredData.flatMap(fd => fd.sentiment_by_brand),
+                sentiment_by_product: filteredData.flatMap(fd => fd.sentiment_by_product),
+                sentiment_by_age: filteredData.flatMap(fd => fd.sentiment_by_age)
+              }} 
+              selectedPhoneNames={filteredData.map((fd) => fd.phone)} 
+            />
             </div>
           </div>
           {modalChart && (
